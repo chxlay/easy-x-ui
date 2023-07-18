@@ -10,8 +10,9 @@ services:
       - '80:80'
       - '443:334'
     volumes:
-      # 挂载配置文件到宿主机
-      - '${ROOT_VOLUME}/nginx/conf:/etc/nginx'
+      # 挂载单个配置文件到宿主机
+      - '${ROOT_VOLUME}/nginx/conf/nginx.conf:/etc/nginx/nginx.conf'
+      - '${ROOT_VOLUME}/nginx/conf/conf.d:/etc/nginx/conf.d'
       # 日志
       - '${ROOT_VOLUME}/nginx/log:/var/log/nginx/'
       # Html 页面
