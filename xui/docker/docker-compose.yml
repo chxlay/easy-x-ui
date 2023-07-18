@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  # Nginx
+  easy-nginx:
+    env_file: .env
+    image: nginx:latest
+    container_name: easy-nginx
+    restart: always
+    ports:
+      - '80:80'
+      - '443:334'
+    volumes:
+      # 挂载配置文件到宿主机
+      - '${ROOT_VOLUME}/nginx/conf:/etc/nginx'
+      # 日志
+      - '${ROOT_VOLUME}/nginx/log:/var/log/nginx/'
+      # Html 页面
+      - '${ROOT_VOLUME}/nginx/html:/usr/share/nginx/html'
+      # 网站挂载
+      - '${ROOT_VOLUME}/nginx/www/wwwroot:/www/wwwroot'
+      # SSL 证书挂在
+      - '${ROOT_VOLUME}/nginx/www/ssl:/www/ssl'
+      # 网站日志记录（非 Nginx 系统日志日志）
+      - '${ROOT_VOLUME}/nginx/www/wwwlogs:/www/wwwlogs'
+    network_mode: 'host'
+
+
+  # x-ui 容器服务启动
+  easy-xui:
+    env_file:
+      - .env
+    build:
+      context: ../
+      dockerfile: Dockerfile
+      args:
+        - 'CPU=${CPU_A}'
+        - 'VERSION=${XUI_VERSION}'
+    image: easy-xui:${XUI_VERSION}
+    container_name: easy-xui
+    restart: always
+    volumes:
+      # x-ui 配置文件挂载到容器外部 /var/appdata/x-ui/conf/config.json
+      - '${ROOT_VOLUME}/x-ui/conf/config.json:/usr/local/x-ui/bin/config.json'
+    ports:
+      - '${XUI_PORT}:54321'
+    network_mode: host
+
+
+
