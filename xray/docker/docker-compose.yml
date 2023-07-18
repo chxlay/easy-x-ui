@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  # Nginx
+  easy-nginx:
+    env_file: .env
+    image: nginx:latest
+    container_name: easy-nginx
+    restart: always
+    ports:
+      - '80:80'
+      - '443:334'
+    volumes:
+      # 挂载配置文件到宿主机
+      - '${ROOT_VOLUME}/nginx/conf:/etc/nginx'
+      # 日志
+      - '${ROOT_VOLUME}/nginx/log:/var/log/nginx/'
+      # Html 页面
+      - '${ROOT_VOLUME}/nginx/html:/usr/share/nginx/html'
+      # 网站挂载
+      - '${ROOT_VOLUME}/nginx/www/wwwroot:/www/wwwroot'
+      # SSL 证书挂在
+      - '${ROOT_VOLUME}/nginx/www/ssl:/www/ssl'
+      # 网站日志记录（非 Nginx 系统日志日志）
+      - '${ROOT_VOLUME}/nginx/www/wwwlogs:/www/wwwlogs'
+    network_mode: 'host'
+
+
+
+  # xray 服务;@see https://github.com/teddysun/across/blob/master/docker/xray/Dockerfile
+  # 官方文档：https://xtls.github.io/
+  easy-xray:
+    env_file:
+      - .env
+    image: teddysun/xray
+    container_name: easy-xray
+    restart: always
+    volumes:
+      # 主要是挂载配置 https://xtls.github.io/config
+      - '${ROOT_VOLUME}/xray:/etc/xray'
+    network_mode: 'host'
