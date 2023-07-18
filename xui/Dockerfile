@@ -15,13 +15,13 @@ WORKDIR /home/x-ui
 # 下载 x-ui压缩包
 #https://github.com/vaxilu/x-ui/releases/download/0.3.2/x-ui-linux-amd64.tar.gz
 #https://github.com/vaxilu/x-ui/releases/download/0.3.2/x-ui-linux-arm64.tar.gz
-RUN curl -SLO https://github.com/vaxilu/x-ui/releases/download/${VERSION}/x-ui-linux-${CPU}64.tar.gz
+RUN curl -SLO https://github.com/vaxilu/x-ui/releases/download/${VERSION}/x-ui-linux-${CPU}.tar.gz
 
 # 解压下载的文件
 RUN set -x \
-    && tar -zxvf x-ui-linux-${CPU}64.tar.gz \
+    && tar -zxvf x-ui-linux-${CPU}.tar.gz \
     # 解压玩之后删除压缩包
-    && rm -rf x-ui-linux-${CPU}64.tar.gz
+    && rm -rf x-ui-linux-${CPU}.tar.gz
 
 # 执行安装和启动
 RUN set -x \
