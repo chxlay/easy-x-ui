@@ -33,6 +33,8 @@ RUN set -x \
 # 端口号暴露
 EXPOSE 54321
 
+WORKDIR /usr/local/x-ui
+
 # 启动服务
 ENTRYPOINT 'systemctl daemon-reload'
 ENTRYPOINT 'systemctl enable x-ui'
