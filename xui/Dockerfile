@@ -1,5 +1,5 @@
 # 选择 Linux 版本 https://hub.docker.com
-FROM centos:centos7.8.2003
+FROM centos:centos:7
 
 # x-ui 版本
 ARG VERSION
@@ -35,7 +35,7 @@ RUN set -x \
 EXPOSE 54321
 
 # 启动服务
-ENTRYPOINT "systemctl daemon-reload"
-ENTRYPOINT "systemctl enable x-ui"
+ENTRYPOINT 'systemctl daemon-reload'
+ENTRYPOINT 'systemctl enable x-ui'
 
 CMD "systemctl restart x-ui"
