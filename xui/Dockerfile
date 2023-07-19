@@ -35,4 +35,5 @@ RUN set -x \
 EXPOSE 54321
 
 # 启动服务
-CMD ["systemctl daemon-reload","systemctl enable x-ui","systemctl restart x-ui"]
+ENTRYPOINT ["systemctl daemon-reload","systemctl enable x-ui"]
+CMD ["systemctl restart x-ui"]
