@@ -38,6 +38,7 @@ services:
         - 'VERSION=${XUI_VERSION}'
     image: easy-xui:${XUI_VERSION}
     container_name: easy-xui
+    privileged: true
     restart: always
     volumes:
       # x-ui 配置文件挂载到容器外部 /var/appdata/x-ui/conf/config.json
