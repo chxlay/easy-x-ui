@@ -1,5 +1,5 @@
 # 选择 Linux 版本 https://hub.docker.com
-FROM centos:centos:7
+FROM centos:7
 
 # x-ui 版本
 ARG VERSION
