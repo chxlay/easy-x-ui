@@ -42,7 +42,7 @@ services:
     network_mode: host
 
 
-  # 自定义编写 x-ui 容器服务启动（启动后可能需要进入容器中执行命令才能启动，后续再处理此问题）
+  # 自定义编写 x-ui 容器服务启动（启动后可能需要进入容器docker exce -it custom-xui bash 中执行命令systemctl restart x-ui才能启动，后续再处理此问题）
   custom-xui:
     env_file:
       - .env
