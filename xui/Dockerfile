@@ -50,6 +50,8 @@ RUN set -x \
 
 # 服务端口号暴露
 EXPOSE 54321
+# 配置文件暴露挂载
+VOLUME ["/usr/local/x-ui/bin/config.json"]
 
 WORKDIR /usr/local/x-ui
 
