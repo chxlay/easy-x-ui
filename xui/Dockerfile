@@ -22,9 +22,6 @@ RUN rm -f /etc/systemd/system/sysinit.target.wants/* \
           /lib/systemd/system/basic.target.wants/* \
           /lib/systemd/system/anaconda.target.wants/*
 
-# linux
-ENTRYPOINT ["/usr/sbin/init"]
-
 # 工作路径创建
 RUN set -x \
     && mkdir /home/x-ui -p
@@ -57,6 +54,8 @@ VOLUME ["/usr/local/x-ui/bin/config.json","/usr/local/x-ui/logs"]
 
 WORKDIR /usr/local/x-ui
 
+# linux
+ENTRYPOINT ["/usr/sbin/init"]
 # 启动 x-ui 应用
-ENTRYPOINT ["systemctl daemon-reload && systemctl enable x-ui && systemctl restart x-ui"]
+#CMD ["systemctl daemon-reload && systemctl enable x-ui && systemctl restart x-ui"]
 CMD ["x-ui"]

@@ -26,9 +26,22 @@ services:
       - '${ROOT_VOLUME}/nginx/www/wwwlogs:/www/wwwlogs'
     network_mode: 'host'
 
-
   # x-ui 容器服务启动
   easy-xui:
+    env_file: .env
+    image: enwaiax/x-ui
+    container_name: easy-xui
+    # 自动启动服务
+    restart: unless-stopped
+    volumes:
+      # x-ui 配置文件挂载到容器外部 /var/appdata/x-ui/conf/config.json
+      - '${ROOT_VOLUME}/x-ui/data:/etc/x-ui/'
+      - '${ROOT_VOLUME}/x-ui/cert:/root/cert/'
+    network_mode: host
+
+
+  # 自定义编写 x-ui 容器服务启动（启动后可能需要进入容器中执行命令才能启动，后续再处理此问题）
+  custom-xui:
     env_file:
       - .env
     build:
@@ -37,8 +50,8 @@ services:
       args:
         - 'CPU=${CPU_A}'
         - 'VERSION=${XUI_VERSION}'
-    image: easy-xui:${XUI_VERSION}
-    container_name: easy-xui
+    image: custom-xui:${XUI_VERSION}
+    container_name: custom-xui
     # 处理容器内使用 systemctl 命令的权限问题
     privileged: true
     cap_add:
