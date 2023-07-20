@@ -25,7 +25,6 @@ services:
     network_mode: 'host'
 
 
-
   # xray 服务;@see https://github.com/teddysun/across/blob/master/docker/xray/Dockerfile
   # 官方文档：https://xtls.github.io/
   easy-xray:
@@ -34,6 +33,8 @@ services:
     image: teddysun/xray
     container_name: easy-xray
     restart: always
+    ports:
+      - '9000:9000'
     volumes:
       # 主要是挂载配置 https://xtls.github.io/config
       - '${ROOT_VOLUME}/xray:/etc/xray'
