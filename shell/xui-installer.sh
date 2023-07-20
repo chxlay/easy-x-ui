@@ -6,7 +6,7 @@ sudo mkdir -p /var/appdata
 sudo cp -r $PWD/../nginx /var/appdata/
 
 # 拷贝 x-ui配置文件到挂在的路径下
-sudo cp -r $PWD/../xui/config.json /var/appdata/x-ui/conf/
+sudo cp -r $PWD/../xui/config.json /var/appdata/x-ui/conf/config.json
 
 # 构建 x-ui 镜像
 docker-compose -f $PWD/../xui/docker/docker-compose.yml build easy-xui
