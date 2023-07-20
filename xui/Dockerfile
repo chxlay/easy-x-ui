@@ -8,7 +8,7 @@ ARG CPU
 # 设置环境变量，用于在容器中运行systemd
 ENV container docker
 # 安装systemd
-RUN sudo yum install -y systemd
+RUN yum install -y systemd
 # 设置默认的运行级别为multi-user.target
 RUN systemctl set-default multi-user.target
 
