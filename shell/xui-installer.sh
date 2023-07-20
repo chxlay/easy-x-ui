@@ -9,6 +9,6 @@ sudo cp -r $PWD/../nginx /var/appdata/
 sudo cp -r $PWD/../xui/config.json /var/appdata/x-ui/conf/config.json
 
 # 构建 x-ui 镜像
-docker-compose -f $PWD/../xui/docker/docker-compose.yml build easy-xui
-# 启动服务( easy-nginx easy-xui )
-docker-compose -f $PWD/../xui/docker/docker-compose.yml up easy-nginx easy-xui
+docker-compose -f $PWD/../xui/docker/docker-compose.yml build custom-xui
+# 启动服务( easy-nginx custom-xui)
+docker-compose -f $PWD/../xui/docker/docker-compose.yml up easy-nginx custom-xui
