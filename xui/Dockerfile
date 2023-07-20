@@ -1,6 +1,5 @@
 # 选择 Linux 版本 https://hub.docker.com
 FROM centos:centos7
-
 # x-ui 版本
 ARG VERSION
 ARG CPU
@@ -23,11 +22,14 @@ RUN rm -f /etc/systemd/system/sysinit.target.wants/* \
           /lib/systemd/system/basic.target.wants/* \
           /lib/systemd/system/anaconda.target.wants/*
 
+# linux
+ENTRYPOINT ["/usr/sbin/init"]
+
 # 工作路径创建
 RUN set -x \
     && mkdir /home/x-ui -p
 
-# Node 环境的工作目录
+# xui 环境的工作目录
 WORKDIR /home/x-ui
 
 # 下载 x-ui压缩包
@@ -55,7 +57,6 @@ VOLUME ["/usr/local/x-ui/bin/config.json","/usr/local/x-ui/logs"]
 
 WORKDIR /usr/local/x-ui
 
-# 启动服务
-ENTRYPOINT ["/usr/sbin/init"]
 # 启动 x-ui 应用
-CMD ["systemctl daemon-reload && systemctl enable x-ui && systemctl restart x-ui"]
+ENTRYPOINT ["systemctl daemon-reload && systemctl enable x-ui && systemctl restart x-ui"]
+CMD ["x-ui"]
