@@ -56,4 +56,5 @@ WORKDIR /usr/local/x-ui
 # 启动服务
 ENTRYPOINT ["/usr/sbin/init"]
 # 启动 x-ui 应用
-CMD ["systemctl daemon-reload && systemctl enable x-ui && systemctl restart x-ui"]
+ENTRYPOINT ["systemctl daemon-reload && systemctl enable x-ui"]
+CMD ["systemctl restart x-ui"]
