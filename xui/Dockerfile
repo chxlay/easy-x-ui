@@ -7,8 +7,10 @@ ARG CPU
 
 # 设置环境变量，用于在容器中运行systemd
 ENV container docker
+
 # 安装systemd
 RUN yum install -y systemd
+
 # 设置默认的运行级别为multi-user.target
 RUN systemctl set-default multi-user.target
 
@@ -20,7 +22,6 @@ RUN rm -f /etc/systemd/system/sysinit.target.wants/* \
           /lib/systemd/system/sockets.target.wants/*initctl* \
           /lib/systemd/system/basic.target.wants/* \
           /lib/systemd/system/anaconda.target.wants/*
-
 
 # 工作路径创建
 RUN set -x \
@@ -52,10 +53,6 @@ EXPOSE 54321
 
 WORKDIR /usr/local/x-ui
 
-# 启动 systemctl 支持
-ENTRYPOINT ["/usr/sbin/init"]
 # 启动服务
-ENTRYPOINT 'systemctl daemon-reload'
-ENTRYPOINT 'systemctl enable x-ui'
-
-CMD 'systemctl restart x-ui'
+ENTRYPOINT ["/usr/sbin/init"]
+CMD ["systemctl enable x-ui && systemctl restart x-ui"]
