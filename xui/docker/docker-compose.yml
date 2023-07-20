@@ -38,11 +38,20 @@ services:
         - 'VERSION=${XUI_VERSION}'
     image: easy-xui:${XUI_VERSION}
     container_name: easy-xui
+    # 处理容器内使用 systemctl 命令的权限问题
     privileged: true
+    cap_add:
+      - 'SYS_ADMIN'
+      - 'SYS_PTRACE'
+    security_opt:
+      - 'seccomp=unconfined'
+
+    # 自动启动服务
     restart: always
     volumes:
       # x-ui 配置文件挂载到容器外部 /var/appdata/x-ui/conf/config.json
       - '${ROOT_VOLUME}/x-ui/conf/config.json:/usr/local/x-ui/bin/config.json'
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
     ports:
       - '${XUI_PORT}:54321'
     network_mode: host
