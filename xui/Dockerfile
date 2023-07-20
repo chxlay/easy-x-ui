@@ -1,5 +1,5 @@
 # 选择 Linux 版本 https://hub.docker.com
-FROM centos:latest
+FROM centos:centos7
 
 # x-ui 版本
 ARG VERSION
@@ -8,9 +8,10 @@ ARG CPU
 # 设置环境变量，用于在容器中运行systemd
 ENV container docker
 # 安装systemd
-RUN yum -y install systemd
+RUN sudo yum install -y systemd
 # 设置默认的运行级别为multi-user.target
 RUN systemctl set-default multi-user.target
+
 # 删除不必要的服务
 RUN rm -f /etc/systemd/system/sysinit.target.wants/* \
           /lib/systemd/system/multi-user.target.wants/* \
