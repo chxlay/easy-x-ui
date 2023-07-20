@@ -48,11 +48,12 @@ RUN set -x \
     && cp -f x-ui/x-ui.service /etc/systemd/system/ \
     && mv x-ui/ /usr/local/
 
-# 端口号暴露
+# 服务端口号暴露
 EXPOSE 54321
 
 WORKDIR /usr/local/x-ui
 
 # 启动服务
 ENTRYPOINT ["/usr/sbin/init"]
+# 启动 x-ui 应用
 CMD ["systemctl daemon-reload && systemctl enable x-ui && systemctl restart x-ui"]

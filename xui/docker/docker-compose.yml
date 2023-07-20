@@ -6,6 +6,7 @@ services:
     image: nginx:latest
     container_name: easy-nginx
     restart: always
+    # network_mode: host模式时可以不用映射端口,一般习惯性的映射端口
     ports:
       - '80:80'
       - '443:334'
@@ -52,6 +53,8 @@ services:
       # x-ui 配置文件挂载到容器外部 /var/appdata/x-ui/conf/config.json
       - '${ROOT_VOLUME}/x-ui/conf/config.json:/usr/local/x-ui/bin/config.json'
       - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+
+    # network_mode: host模式时可以不用映射端口,一般习惯性的映射端口
     ports:
       - '${XUI_PORT}:54321'
     network_mode: host
