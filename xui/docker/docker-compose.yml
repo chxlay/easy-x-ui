@@ -53,8 +53,7 @@ services:
       - '${ROOT_VOLUME}/x-ui/conf/config.json:/usr/local/x-ui/bin/config.json'
       - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
     ports:
-      - '54321:54321'
+      - '${XUI_PORT}:54321'
     network_mode: host
-
 
 
