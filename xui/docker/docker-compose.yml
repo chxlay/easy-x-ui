@@ -26,7 +26,7 @@ services:
       - '${ROOT_VOLUME}/nginx/www/wwwlogs:/www/wwwlogs'
     network_mode: 'host'
 
-  # x-ui 容器服务启动
+  # x-ui 容器服务启动，进入容器命令：docker exce -it custom-xui sh
   easy-xui:
     env_file: .env
     image: enwaiax/x-ui
